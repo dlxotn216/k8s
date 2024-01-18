@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: replicaset-nginx
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: my-nginx-pods-label    # match label selector
+  template:
+    metadata:
+      name: my-nginx-pod
+      labels:
+        app: my-nginx-pods-label  # 라벨을 통한 느슨한 연결
+    spec:
+      containers:
+        - name: my-ngingx-container
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+
