@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hostname-svc-clusterip
+spec:
+  ports:
+    - name: web-port
+      port: 8080     # 쿠버네티스 내부에서만 사용할수 있는 고유한 IP를 할당받는 서비스가 사용할 포트
+      targetPort: 80 # deployment-hostname 서비스의 포트. 파드템플릿에 정의된 containerPort와 같은 값으로 설정해야 함
+                     # 실수로 deployment-hostname.yaml에서 containerPort 9376 지정했는데 왜 되지..?
+  selector:
+    app: webserver   # hostname-deployment 서비스의 label
+  type: ClusterIP
