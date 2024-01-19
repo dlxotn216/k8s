@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hostname-svc-nodeport
+spec:
+#    sessionAffinity: ClientIP # 특정 클라이언트가 같은 파드로부터만 처리되게 하려는 경우
+    ports:
+      - name: web-port
+        port: 8080
+        targetPort: 80
+        nodePort: 30080
+    selector:
+        app: webserver
+    type: NodePort
