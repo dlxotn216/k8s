@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hostname-svc-lb
+spec:
+  externalTrafficPolicy: Local # 파드가 생성된 노드에서만 파드로 접근할 수 있게 한다
+  ports:
+    - name: web-port
+      port: 80    # LB에서 접근하기 위한 포트
+      targetPort: 80
+
+  selector:
+    app: webserver   # hostname-deployment 서비스의 label
+  type: LoadBalancer
