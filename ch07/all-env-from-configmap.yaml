@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: container-env-example
+spec:
+  containers:
+    - name: my-container
+      image: busybox
+      args: [ "tail", "-f", "/dev/null" ]
+      envFrom:  # envFrom를 사용하면 ConfigMap과 Secret을 한 번에 여러 개 가져올 수 있다.
+        - configMapRef:
+            name: log-level-configmap
+        - configMapRef:
+            name: start-k8s
