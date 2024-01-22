@@ -1,0 +1,6 @@
+secretGenerator:            # secret 생성을 위한 지시문
+  - name: kustomize-secret
+    type: kubenetes.io/tls  # tls 타입의 시크릿 생성
+    files:
+    - tls.key=cert.key             # tls.key에 cert.key 파일 내용 저장
+    - tls.crt=cert.crt             # tls.crt에 cert.crt 파일 내용 저장
