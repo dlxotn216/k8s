@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-example
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - taesu.example.com
+      secretName: tls-secret    # tls 인증서를 저장한 시크릿 이름
+  rules:
+    - host: taesu.example.com   # 해당 도메인 이름으로 접근하는 요청에 대해 처리 규칙 정적용
+      http:
+        paths:
+          - path: /echo-hostname  # 해당 경로에 들어온 요청을 어느 서비스로 전달 할 것인가
+            pathType: Prefix
+            backend:
+              service:
+                name: hostname-service # path로 들어온 요청이 이 서비스의 80번 포트로 전달됨
+                port:
+                  number: 80
