@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-example
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2 # http.paths.path의 (.*)에서 획득한 경로로 전달
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: taesu.example.com   # 해당 도메인 이름으로 접근하는 요청에 대해 처리 규칙 정적용
+    http:
+      paths:
+        - path: /echo-hostname(/|$)(.*) # (.*)를 통해 경로를 추출한다
+          pathType: Prefix
+          backend:
+            service:
+              name: hostname-service # path로 들어온 요청이 이 서비스의 80번 포트로 전달됨
+              port:
+                number: 80
