@@ -1,0 +1,9 @@
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: fast
+provisioner: kubernetes.io/aws-ebs # EBS 동적 프로비저너
+parameters:
+  type: st2   # EBS 종류, st1, gp2, sc1, io1
+  fsType: ext4
+  zone: ap-northeast-2a
