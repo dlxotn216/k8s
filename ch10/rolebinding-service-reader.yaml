@@ -1,0 +1,13 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: service-reader-binding
+  namespace: default
+subjects:
+  - kind: ServiceAccount # 권한을 부여할 대상이 ServiceAccount임
+    name: taesu          # taesu라는 이름의 ServiceAccount에 권한을 부여한다
+    namespace: default
+roleRef:
+  kind: Role            # Role에 정의된 권한을 부여한다.
+  name: service-reader  # service-reader라는 이름의 Role을 대상 (subjects)에 연결한다
+  apiGroup: rbac.authorization.k8s.io
