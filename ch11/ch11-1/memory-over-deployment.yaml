@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: memory-over-deployment
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: memory-over-pod
+  template:
+    metadata:
+      labels:
+        app: memory-over-pod
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:latest
+          resources:
+            limits:
+              cpu: "200m"
+              memory: "3000Mi"
+            requests:
+              cpu: "200m"
+              memory: "128Mi"
