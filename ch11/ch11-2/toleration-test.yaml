@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-toleration-test
+spec:
+  tolerations:
+    - key: taesu/my-taint
+      value: dirty
+      operator: Equal     # Taint 키와 값이 일치하는 경우
+      effect: NoSchedule  # Taint 효과가 NoSchedule 인 경우 해당 Taint를 용인한다.
+  containers:
+    - name: nginx
+      image: nginx:latest
