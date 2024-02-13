@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: podstart-hook
+spec:
+  containers:
+    - name: podstart-hook
+      image: nginx
+      lifecycle:
+        postStart:
+          exec:
+            command: ["sh", "-c", "touch /myfile"]
